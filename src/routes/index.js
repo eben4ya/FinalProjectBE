@@ -2,7 +2,15 @@ const express = require("express");
 
 const router = express.Router();
 
-const { createNumber, getNumber, updateNumber, deleteNumber, registerUser} = require("../controllers/index.js");
+const {
+  createNumber,
+  getNumber,
+  updateNumber,
+  deleteNumber,
+  registerUser,
+  getAllUsers,
+  getUserById,
+} = require("../controllers/index.js");
 
 // Untuk mengakses ini, kita harus menambahkan /api di depannya
 // hasilnya /api/create, /api/get, /api/update, /api/delete
@@ -16,5 +24,8 @@ router.delete("/delete", deleteNumber);
 
 router.post("/register", registerUser);
 
-module.exports = router;
+router.get("/users", getAllUsers);
 
+router.get("/user/:id", getUserById);
+
+module.exports = router;

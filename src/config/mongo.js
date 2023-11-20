@@ -3,8 +3,8 @@ const mongoose = require("mongoose");
 //  function agar bisa connect ke mongoDB
 function mongoConnect() {
   mongoose.connect(process.env.MONGODB_URl, {
-    useNewUrlParser: true, // digunakan agar URL di config.env bisa terbaca. Soalnya dulu URLnya tidak sependek ini. jadi kode ini diperlukan
-    useUnifiedTopology: true,
+    // useNewUrlParser: true, // digunakan agar URL di config.env bisa terbaca. Soalnya dulu URLnya tidak sependek ini. jadi kode ini diperlukan
+    // useUnifiedTopology: true,
     // useCreateIndex: true
   });
 

@@ -85,3 +85,38 @@ exports.updateUserById = (req, res) => {
       res.status(400).json({ error: err.message });
     });
 };
+
+// DELETE DATA BY ID FROM MONGO DB
+exports.deleteUserById = (req, res) => {
+  const { id } = req.params;
+
+  User.findOneAndDelete({ id: id })
+    .then((user) => {
+      if (!user) {
+        return res.status(404).json({ error: "User not found!" });
+      } else {
+        res.status(200).json({ user });
+      }
+    })
+    .catch((err) => {
+      res.status(400).json({ error: err.message });
+    });
+};
+
+// DELETE ALL DATA FROM MONGO DB
+// DELETE ALL DATA WITH THE SAME ID
+exports.deleteAllUsers = (req, res) => {
+    const { id } = req.params;
+
+    User.deleteMany({id: id})
+    .then((user) => {
+        if(user.deletedCount === 0) {
+            res.status(404).json({ error: "User not found!"})
+        }else {
+            res.status(200).json({ user})
+        }
+    })
+    .catch((err) => {
+        res.status(400).json({ error: err.message})
+    })
+}

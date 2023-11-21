@@ -31,7 +31,11 @@ app.get("/", (req, res) => {
   res.send("Hello World");
 });
 
+// Rest API
 app.use("/api", require("./src/routes/index.js"));
+
+// Rest API + Mongoose
+app.use("/user", require("./src/routes/user.js"));
 
 app.listen(3000, () => {
   console.log("Server is running on port 3000");

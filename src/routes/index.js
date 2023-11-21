@@ -10,6 +10,7 @@ const {
   registerUser,
   getAllUsers,
   getUserById,
+  updateUserById,
 } = require("../controllers/index.js");
 
 // Untuk mengakses ini, kita harus menambahkan /api di depannya
@@ -27,5 +28,7 @@ router.post("/register", registerUser);
 router.get("/users", getAllUsers);
 
 router.get("/user/:id", getUserById);
+
+router.put("/user/:id", updateUserById);
 
 module.exports = router;

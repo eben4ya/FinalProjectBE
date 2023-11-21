@@ -124,9 +124,29 @@ exports.getUserById = (req, res) => {
   //     res.status(400).json({ error: err.message });
   //   });
 
-  User.find(({ id: id })) // 2 parameter, 1. id yang mau dicari, 2. callback function --> User.find(({ id: id }), (req, res) => { ... }) 
+  User.find({ id: id }) // 2 parameter, 1. id yang mau dicari, 2. callback function --> User.find(({ id: id }), (req, res) => { ... })
     .then((user) => {
-      if (user.length === 0) { // jika user tidak ditemukan
+      if (user.length === 0) {
+        // jika user tidak ditemukan
+        return res.status(404).json({ error: "User not found!" });
+      } else {
+        res.status(200).json({ user });
+      }
+    })
+    .catch((err) => {
+      res.status(400).json({ error: err.message });
+    });
+};
+
+// UPDATE DATA BY ID FROM MONGO DB
+
+exports.updateUserById = (req, res) => {
+  const { id } = req.params;
+  const { name, email, passoword } = req.body;
+
+  User.findOneAndUpdate({ id: id }, { name, email, passoword }, { new: true })
+    .then((user) => {
+      if (!user) {
         return res.status(404).json({ error: "User not found!" });
       } else {
         res.status(200).json({ user });

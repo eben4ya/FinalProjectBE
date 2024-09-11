@@ -25,7 +25,7 @@ app.use(express.json());
 app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(cors());
+app.use(cors()); // don't forget to configure cors at production
 
 app.get("/", (req, res) => {
   res.send("Hello World");
